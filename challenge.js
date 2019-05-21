@@ -1,6 +1,8 @@
-let timerThing = document.querySelector('#counter')
-let seconds = 0
-let isPaused = false
+let seconds = 0 // Counts Up
+let isPaused = false // Pause Switch
+let likeArr = [] // All Likes Stored
+let uniqArr = [] // Unique Likes Stored
+const timerThing = document.querySelector('#counter')
 const minusBtn = document.getElementById('-')
 const addBtn = document.getElementById('+')
 const likeBtn = document.getElementById('<3')
@@ -9,8 +11,7 @@ const likesList = document.querySelector('#likes')
 const commentForm = document.querySelector('#comment-form')
 const commentList = document.querySelector('#comment-list')
 
-let likeArr = []
-let uniqArr = []
+// Adds Likes to DOM
 likeBtn.addEventListener('click',e=>{
   likeArr.push(`${seconds} has been liked`)
   if (!uniqArr.includes(`${seconds} has been liked`)) {
@@ -25,18 +26,22 @@ likeBtn.addEventListener('click',e=>{
   }
 })
 
+// Runs Timer When Page Opens
 var timer = setInterval(()=>{
   timerThing.innerText = `${++seconds}`
 }, 1000)
 
+// Subtracts 1 Second
 function subSec() {
   timerThing.innerText = `${--seconds}`
 }
 
+// Adds 1 second
 function addSec() {
   timerThing.innerText = `${++seconds}`
 }
 
+// Add Comments to DOM
 commentForm.addEventListener('submit', e=>{
   e.preventDefault()
   const commentInput = document.querySelector('#comment-input')
@@ -46,6 +51,7 @@ commentForm.addEventListener('submit', e=>{
   commentForm.reset()
 })
 
+// Pauses Timer & Disables Buttons
 pauseBtn.addEventListener('click',e=>{
   isPaused = !isPaused
   if (!isPaused) {
@@ -63,12 +69,14 @@ pauseBtn.addEventListener('click',e=>{
   }
 })
 
+// Function to Restart Time After Pause
 function startTimer() {
   timer = setInterval(()=>{
     timerThing.innerText = `${++seconds}`
   }, 1000)
 }
 
+// Functions to Pause Timer
 function stopTimer() {
   clearInterval(timer)
 }
